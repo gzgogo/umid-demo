@@ -1,0 +1,113 @@
+<html>
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <meta http-equiv="Content-Style-Type" content="text/css">
+
+        <title>WebSocket测试</title>
+
+        <meta name="Generator" content="Cocoa HTML Writer">
+
+        <meta name="CocoaVersion" content="1561.6">
+
+        <style type="text/css">
+
+ 
+</style>
+
+<script>
+ 
+var ws;
+ 
+function Connect(){
+ 
+try{
+ 
+ws = new WebSocket('ws:30.25.78.77:9999');
+ 
+}catch(e){
+ 
+alert("catch error is " + e);
+ 
+return;
+ 
+}
+ 
+ws.onopen = sOpen;
+ 
+ws.onerror = sError;
+ 
+ws.onmessage= sMessage;
+ 
+ws.onclose= sClose;
+ 
+}
+ 
+function sOpen(){
+ 
+alert('connect success!');
+ 
+}
+ 
+function sError(e){
+ 
+alert("error " + e);
+ 
+}
+ 
+function sMessage(msg){
+ 
+alert('server says:' + msg);
+ 
+}
+ 
+function sClose(e){
+ 
+alert("connect closed:" + e.code);
+ 
+}
+ 
+function Send(){
+ 
+ws.send(document.getElementById("msg").value);
+ 
+}
+ 
+function Close(){
+ 
+ws.close();
+ 
+}
+
+function paste() {
+      navigator.clipboard.readText()
+        .then(text => {
+          alert(text);
+          console.log('Pasted content: ', text);
+        })
+        .catch(err => {
+          console.error('Failed to read clipboard contents: ', err);
+        });
+}
+ 
+</script>
+
+    </head>
+
+    <body>
+
+        <input id="msg" type="text">
+
+        <button id="connect" onclick="Connect();">Connect</button>
+
+        <button id="send" onclick="Send();">Send</button>
+
+        <button id="close" onclick="Close();">Close</button>
+
+        <button onclick="paste()">粘贴</button>
+
+    </body>
+
+</html>

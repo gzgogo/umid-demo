@@ -82,14 +82,20 @@ ws.close();
 }
 
 function paste() {
-      navigator.clipboard.readText()
+  try {
+    navigator.clipboard.readText()
         .then(text => {
           alert(text);
-          console.log('Pasted content: ', text);
+          alert('Pasted content: ', text);
         })
         .catch(err => {
-          console.error('Failed to read clipboard contents: ', err);
+          alert(err);
         });
+  }
+  catch (e) {
+    alert(e);
+  }
+ 
 }
  
 </script>
@@ -97,7 +103,7 @@ function paste() {
     </head>
 
     <body>
-
+ggg11
         <input id="msg" type="text">
 
         <button id="connect" onclick="Connect();">Connect</button>
